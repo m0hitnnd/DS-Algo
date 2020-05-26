@@ -19,28 +19,24 @@ import UIKit
 
 class Solution {
     func findMaxLength(_ nums: [Int]) -> Int {
-        let length = nums.count
-        var sumValues: [[Int]] = Array(repeating: [], count: length)
+        var sumFirstIndexHash: [Int: Int] = [:]
         var maxLength = 0
-        
-        var i = 0
-        var j = 0
-        while i <= (length - 1) {
-            j = 0
-            while j <= i {
-                let currentVal = (nums[i] == 0 ? -1 : 1)
-                if j == i {
-                    sumValues[i].insert(currentVal, at: j)
-                } else {
-                    sumValues[i].insert(sumValues[i-1][j] + currentVal, at: j)
-                }
-                if sumValues[i][j] == 0 {
-                    maxLength = max(maxLength, (i - j + 1))
-                }
-                j += 1
+        var value = 0
+        for i in 0..<nums.count {
+            value = value + (nums[i] == 0 ? -1 : 1)
+            
+            let firstTimeOccurrenceSumIndex = sumFirstIndexHash[value]
+            if firstTimeOccurrenceSumIndex == nil {
+                sumFirstIndexHash[value] = i
             }
-            i += 1
+            
+            if value == 0 {
+                maxLength = max(maxLength, i + 1)
+            } else {
+                maxLength = max(maxLength, i - (firstTimeOccurrenceSumIndex ?? i))
+            }
         }
+      
         return maxLength
     }
 }
