@@ -28,23 +28,38 @@ import UIKit
 class Solution {
     
     private static let mapping:[Character: [String]] = ["2": ["a", "b", "c"],
-                                  "3": ["d", "e", "f"],
-                                  "4": ["g", "h", "i"],
-                                  "5": ["j", "k", "l"],
-                                  "6": ["m", "n", "o"],
-                                  "7": ["p", "q", "r", "s"],
-                                  "8": ["t", "u", "v"],
-                                  "9": ["w", "x", "y", "z"]]
+                                                        "3": ["d", "e", "f"],
+                                                        "4": ["g", "h", "i"],
+                                                        "5": ["j", "k", "l"],
+                                                        "6": ["m", "n", "o"],
+                                                        "7": ["p", "q", "r", "s"],
+                                                        "8": ["t", "u", "v"],
+                                                        "9": ["w", "x", "y", "z"]]
     
     func letterCombinations(_ digits: String) -> [String] {
         
-        for digit in digits {
-            let digitMapping = Solution.mapping[digit]
-            print("digits mapping - \(digitMapping)")
+        guard let firstDigit = digits.first, let firstDigitMapping = Solution.mapping[firstDigit] else { return [] }
+        
+        var result = firstDigitMapping
+        
+        for digit in digits.dropFirst() {
+            let digitMapping = Solution.mapping[digit] ?? []
+            result = combineTwoLetterArray(result, digitMapping)
         }
-        return []
+        return result
+    }
+    
+    func combineTwoLetterArray(_ arr1: [String], _ arr2: [String]) -> [String] {
+        var result: [String] = []
+        
+        for letter1 in arr1 {
+            for letter2 in arr2 {
+                result.append(letter1 + letter2)
+            }
+        }
+        return result
     }
 }
 
 let sol = Solution()
-sol.letterCombinations("23")
+print(sol.letterCombinations("9999"))
