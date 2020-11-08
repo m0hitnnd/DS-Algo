@@ -46,24 +46,6 @@ class Solution {
         let totalLength = nums1.count + nums2.count
         let medianIndex: Int = Int(ceil(Double(totalLength) / 2.0))
         
-        guard nums1.isEmpty == false else {
-            let valueAtNum2 = Double(nums2[medianIndex - 1])
-            if totalLength % 2 == 0 {
-                return Double(valueAtNum2 + Double(nums2[medianIndex])) / 2.0
-            } else {
-                return valueAtNum2
-            }
-        }
-        
-        guard nums2.isEmpty == false else {
-            let valueAtNum1 = Double(nums1[medianIndex - 1])
-            if totalLength % 2 == 0 {
-                return Double(valueAtNum1 + Double(nums1[medianIndex])) / 2.0
-            } else {
-                return valueAtNum1
-            }
-        }
-        
         var count = 0
         var nums1Index = 0
         var nums2Index = 0
