@@ -72,11 +72,7 @@ class Solution {
                     }
                     
                 } else {
-                    if valueAtNum1 <= valueAtNum2 {
-                        ans = Double(valueAtNum1)
-                    } else {
-                        ans = Double(valueAtNum2)
-                    }
+                    ans = Double(min(valueAtNum1, valueAtNum2))
                 }
             } else {
                 if valueAtNum1 <= valueAtNum2 {
