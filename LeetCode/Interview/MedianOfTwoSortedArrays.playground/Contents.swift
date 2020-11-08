@@ -69,8 +69,8 @@ class Solution {
         var nums2Index = 0
         var ans: Double = 0
         while count != medianIndex {
-            let valueAtNum1 = nums1.indices.contains(nums1Index) ? nums1[nums1Index] : 
-            let valueAtNum2 = nums2[nums2Index]
+            let valueAtNum1 = nums1.indices.contains(nums1Index) ? nums1[nums1Index] : Int.max
+            let valueAtNum2 = nums2.indices.contains(nums2Index) ? nums2[nums2Index] : Int.max
             if count + 1 == medianIndex {
                 if totalLength % 2 == 0 {
                     if valueAtNum1 <= valueAtNum2 {
@@ -85,7 +85,7 @@ class Solution {
                             let nextVal = valueAtNum1 <= nums2[nums2Index + 1] ? valueAtNum1 : nums2[nums2Index + 1]
                             ans = Double(valueAtNum2 + nextVal) / 2.0
                         } else {
-                            ans = Double(valueAtNum1 + valueAtNum2) / 2.0 // 1,3  2, 7
+                            ans = Double(valueAtNum1 + valueAtNum2) / 2.0
                         }
                     }
                     
@@ -119,6 +119,9 @@ print(sol.findMedianSortedArrays([], [3, 5, 6]))
 print(sol.findMedianSortedArrays([], [2, 3]))
 print(sol.findMedianSortedArrays([2, 3], []))
 print(sol.findMedianSortedArrays([2, 2, 2], [2, 2, 2, 2]))
+print(sol.findMedianSortedArrays([2, 2, 2, 2], [2, 2, 2]))
+print(sol.findMedianSortedArrays([1, 3], [2, 7]))
+
 
 
 
