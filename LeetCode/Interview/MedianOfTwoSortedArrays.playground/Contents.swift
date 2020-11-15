@@ -41,6 +41,8 @@ import UIKit
  */
 
 
+// O((m+n)/2)
+
 class Solution {
     func findMedianSortedArrays(_ nums1: [Int], _ nums2: [Int]) -> Double {
         let totalLength = nums1.count + nums2.count
