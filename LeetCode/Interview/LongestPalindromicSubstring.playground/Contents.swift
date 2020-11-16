@@ -29,25 +29,34 @@ import UIKit
  */
 
 class Solution {
+    
+    func printArrayInVertical(_ arr: [[Int]]) {
+        for i in 0..<arr.count {
+            print("\(arr[i]) \n")
+        }
+        print("\n\n")
+    }
+    
     func longestPalindrome(_ s: String) -> String {
+        guard s.count > 1 else { return s }
         let stringArray = Array(s)
         var sol: [[Int]] = Array(repeating: Array(repeating: 0, count: s.count), count: s.count)
-        var longestPal: String = ""
         let totalLength = s.count
-        
+        var maxLength = 1
+        var startIndex = 0
+                
         for i in 0..<totalLength {
             sol[i][i] = 1
         }
-        print(sol)
-        
         for i in 0..<totalLength - 1 {
             if stringArray[i] == stringArray[i+1] {
                 sol[i][i+1] = 1
+                startIndex = i
+                maxLength = 2
             }
         }
-        print(sol)
-        
-        for i in 3..<totalLength + 1 {
+
+        for i in stride(from: 3, through: totalLength, by: 1) {
             for j in 0..<totalLength - i + 1 {
                 let lengthWiseEndIndex = j + i - 1
                 guard stringArray[j] == stringArray[lengthWiseEndIndex] else {
@@ -56,13 +65,25 @@ class Solution {
                 }
                 if sol[j + 1][lengthWiseEndIndex - 1] == 1 {
                     sol[j][lengthWiseEndIndex] = 1
+                    
+                    if i > maxLength {
+                        maxLength = i
+                        startIndex = j
+                    }
                 }
             }
         }
-        print(sol)
-        return longestPal
+        let longestPalArray = stringArray[startIndex..<(startIndex + maxLength)]
+        return String(longestPalArray)
     }
 }
 
 let sol = Solution()
-sol.longestPalindrome("aabbaa")
+print(sol.longestPalindrome("cbbd"))
+print(sol.longestPalindrome("aabbaa"))
+print(sol.longestPalindrome("bb"))
+print(sol.longestPalindrome("abcd"))
+print(sol.longestPalindrome("babad"))
+print(sol.longestPalindrome("ac"))
+
+
