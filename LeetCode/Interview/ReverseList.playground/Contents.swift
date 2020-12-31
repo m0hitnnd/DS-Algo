@@ -47,13 +47,32 @@ class Solution {
         }
         return prev
     }
+    
+    func reverseListRecursively(_ head: ListNode?) -> ListNode? {
+        return recursiveReverse(nil, current: head)
+    }
+    
+    private func recursiveReverse(_ prev: ListNode?, current: ListNode?) -> ListNode? {
+        guard current != nil else {
+            return prev
+        }
+        let next = current?.next
+        current?.next = prev
+        return recursiveReverse(current, current: next)
+    }
 }
 
 let sol = Solution()
-print(sol.reverseList(ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, nil)))))))
-print(sol.reverseList(ListNode(1, nil)))
-print(sol.reverseList(nil))
-print(sol.reverseList(ListNode(5, ListNode(4, ListNode(3, ListNode(2, ListNode(1, nil)))))))
-print(sol.reverseList(ListNode(4, ListNode(3, ListNode(2, ListNode(1, nil))))))
+print(sol.reverseList(ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, nil)))))) as Any)
+print(sol.reverseList(ListNode(1, nil)) as Any)
+print(sol.reverseList(nil) as Any)
+print(sol.reverseList(ListNode(5, ListNode(4, ListNode(3, ListNode(2, ListNode(1, nil)))))) as Any)
+print(sol.reverseList(ListNode(4, ListNode(3, ListNode(2, ListNode(1, nil))))) as Any)
+print("\n\nRecursive ><><><><><><><><><><><><><><><><\n\n")
+print(sol.reverseListRecursively(ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5, nil)))))) as Any)
+print(sol.reverseListRecursively(ListNode(1, nil)) as Any)
+print(sol.reverseListRecursively(nil) as Any)
+print(sol.reverseListRecursively(ListNode(5, ListNode(4, ListNode(3, ListNode(2, ListNode(1, nil)))))) as Any)
+print(sol.reverseListRecursively(ListNode(4, ListNode(3, ListNode(2, ListNode(1, nil))))) as Any)
 
 
